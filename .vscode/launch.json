@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-AuroraApplication<Aurora>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "Esfe.Aurora.AuroraApplication",
+            "projectName": "Aurora",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
