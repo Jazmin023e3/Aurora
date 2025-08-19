@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/detalles")
-public class DetalleVentaController {
+public class VentaController {
 
     @Autowired
     private DetalleVentaService detalleService;

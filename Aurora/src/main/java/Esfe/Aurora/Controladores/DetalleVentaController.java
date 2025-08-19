@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/ventas")
-public class VentaController {
+public class DetalleVentaController { // <-- Cambiado aquí
 
     @Autowired
     private VentaService ventaService;
@@ -50,4 +50,3 @@ public class VentaController {
         return "redirect:/ventas";
     }
 }
-
