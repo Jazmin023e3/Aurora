@@ -1,7 +1,8 @@
 package Esfe.Aurora.Controladores;
 
 import Esfe.Aurora.Modelos.Cliente;
-import Esfe.Aurora.Servicios.ClienteService;
+import Esfe.Aurora.Servicios.Implementacion.ClienteService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
