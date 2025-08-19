@@ -1,7 +1,8 @@
 package Esfe.Aurora.Controladores;
 
 import Esfe.Aurora.Modelos.Cliente;
-import Esfe.Aurora.Servicios.ClienteService;
+
+import org.hibernate.boot.registry.classloading.spi.ClassLoaderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,11 +13,11 @@ import org.springframework.web.bind.annotation.*;
 public class ClienteController {
 
     @Autowired
-    private ClienteService clienteService;
+    private ClassLoaderService clienteService;
 
     @GetMapping
     public String listar(Model model) {
-        model.addAttribute("clientes", clienteService.findAll());
+        model.addAttribute("clientes", ((Object) clienteService).findAll());
         return "clientes/lista";
     }
 
