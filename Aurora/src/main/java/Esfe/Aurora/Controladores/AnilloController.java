@@ -1,12 +1,8 @@
 package Esfe.Aurora.Controladores;
 
 import Esfe.Aurora.Modelos.Anillo;
-<<<<<<< HEAD
 import Esfe.Aurora.Servicios.Implementacion.AnilloService;
 
-=======
-import Esfe.Aurora.Servicios.AnilloService;
->>>>>>> 874ec47 (se le cambio el anilloController y anilloService)
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
