@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/_mainLayout}">
+<head>
+    <title layout:fragment="title">Listado de Detalles de Ventas</title>
+</head>
+<body>
+<section layout:fragment="content">
+
+    <!-- Mensajes -->
+    <div th:if="${msg != null}">
+        <script>
+            swal({
+                title:"Confirmación",
+                text: '[[ ${msg} ]]',
+                icon: "success"
+            });
+        </script>
+    </div>
+    <div th:if="${error != null}">
+        <script>
+            swal({
+                title:"Error",
+                text: '[[ ${error} ]]',
+                icon: "error"
+            });
+        </script>
+    </div>
+
+    <h2>Listado de Detalles de Ventas</h2>
+
+    <div class="mb-3">
+        <a th:href="@{/detalleVentas/create}" class="btn btn-success">Nuevo Detalle</a>
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Venta</th>
+            <th>Anillo</th>
+            <th>Cantidad</th>
+            <th>Precio Unitario</th>
+            <th>Subtotal</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="detalle : ${detalleVentas.content}">
+            <td th:text="${detalle.venta != null ? detalle.venta.idVenta : '-'}">Venta</td>
+            <td th:text="${detalle.anillo != null ? detalle.anillo.nombre : '-'}">Anillo</td>
+            <td th:text="${detalle.cantidad}">Cantidad</td>
+            <td th:text="${#numbers.formatDecimal(detalle.precioUnitario, 1, 'POINT', 2, 'NONE')}">Precio Unitario</td>
+            <td th:text="${#numbers.formatDecimal(detalle.subtotal, 1, 'POINT', 2, 'NONE')}">Subtotal</td>
+            <td>
+                <a th:href="@{/detalleVentas/view/{id}(id=${detalle.idDetalle})}" class="btn btn-info btn-sm">Ver</a>
+                <a th:href="@{/detalleVentas/edit/{id}(id=${detalle.idDetalle})}" class="btn btn-warning btn-sm">Editar</a>
+                <a th:href="@{/detalleVentas/delete/{id}(id=${detalle.idDetalle})}" class="btn btn-danger btn-sm"
+                   onclick="return confirm('¿Seguro que deseas eliminar este detalle?');">Eliminar</a>
+            </td>
+        </tr>
+        <tr th:if="${detalleVentas.totalElements == 0}">
+            <td colspan="6" class="text-center">No hay detalles de ventas registrados.</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Paginación -->
+    <nav th:if="${pageNumbers}">
+        <ul class="pagination justify-content-center">
+            <li th:each="pageNum : ${pageNumbers}" class="page-item"
+                th:classappend="${pageNum == detalleVentas.number + 1} ? 'active'">
+                <a class="page-link" th:href="@{/detalleVentas(page=${pageNum}, size=${detalleVentas.size})}" th:text="${pageNum}"></a>
+            </li>
+        </ul>
+    </nav>
+
+</section>
+</body>
+</html>
