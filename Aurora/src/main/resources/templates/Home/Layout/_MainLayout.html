@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title layout:title-pattern="$DECORATOR_TITLE | $CONTENT_TITLE">Inventario de Anillos</title>
+    <!-- Enlace a los archivos CSS de Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Enlace a los archivos de SweetAlert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- Enlace a Font Awesome para los íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" xintegrity="sha512-..." crossorigin="anonymous" />
+    <style>
+        body {
+            background-color: #f0f2f5; /* Un fondo gris claro para una apariencia moderna */
+        }
+        .navbar {
+            background-color: #343a40 !important; /* Un gris oscuro para la barra de navegación */
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(0, 0, 0, 0.03);
+        }
+        .table-bordered {
+            border-radius: 10px;
+        }
+        .btn-custom-add {
+            background-color: #28a745;
+            color: white;
+            border-color: #28a745;
+        }
+    </style>
+</head>
+<body>
+<!-- Barra de Navegación -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" th:href="@{/}">Inventario de Anillos</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/anillos}">Ver Anillos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/clientes}">Ver Clientes</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+     <!-- Contenido principal de la página -->
+    <main class="container mt-4">
+        <section layout:fragment="content">
+            <!-- El contenido específico de la página se insertará aquí -->
+        </section>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="bg-dark text-white text-center text-lg-start mt-5 p-4">
+        <div class="container">
+            <p class="mb-0">&copy; 2025 Inventario de Anillos. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Archivos de JavaScript necesarios para Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
