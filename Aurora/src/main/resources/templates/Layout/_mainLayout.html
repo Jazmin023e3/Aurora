@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en" xmlns:Layout="http://www.ultraq.net.nz/thymeleaf/layout">
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>ESFE - ASISTENCIA</title>
+    <title layout:fragment="title">Aurora</title>
     <meta
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
       name="viewport"
@@ -107,23 +107,23 @@
                 <div class="collapse" id="base">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="components/avatars.html">
-                        <span class="sub-item">Anillo</span>
+                      <a href="@{/anillos}">
+                        <span class="sub-item">Anillos</span>
                       </a>
                     </li>
                     <li>
-                      <a th:href="@{/grupos}">
-                        <span class="sub-item">Venta</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a th:href="@{/docentes}">
+                      <a th:href="@{/Cliente}">
                         <span class="sub-item">Cliente</span>
                       </a>
                     </li>
+                    <li>
+                      <a th:href="@{/DetalleVenta}">
+                        <span class="sub-item">DetalleVenta</span>
+                      </a>
+                    </li>
                      <li>
-                      <a th:href="@{/asignaciones}">
-                        <span class="sub-item">Detalle de Venta</span>
+                      <a th:href="@{/Venta}">
+                        <span class="sub-item">Venta</span>
                       </a>
                     </li>
 

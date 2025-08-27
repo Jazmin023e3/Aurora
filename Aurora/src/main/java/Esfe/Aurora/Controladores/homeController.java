@@ -22,7 +22,7 @@ public class homeController {
     }
     @GetMapping("/login" )
     public String mostrarLogin() {
-        return "home/formLogin";
+        return "Home/formLogin";
     }
 
     @GetMapping("/logout")
