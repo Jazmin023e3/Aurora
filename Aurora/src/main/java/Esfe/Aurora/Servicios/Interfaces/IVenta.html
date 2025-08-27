@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{Layout/_mainLayout}">
+    <head>
+        <title>Gestión de Ventas</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+            body { font-family: 'Inter', sans-serif; }
+            .active-link { background-color: #4a5568; }
+        </style>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="bg-gray-100 flex h-screen">
+                <!-- Sidebar de Navegación -->
+                <aside class="w-64 bg-gray-900 text-white shadow-lg p-6 flex flex-col">
+                    <h1 class="text-2xl font-bold mb-8 text-indigo-400">Panel de Ventas</h1>
+                    <nav class="w-full">
+                        <ul class="space-y-4">
+                            <li>
+                                <a href="#" id="link-lista" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200 active-link">
+                                    <span class="font-medium">Lista de Ventas</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" id="link-form" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
+                                    <span class="font-medium">Formulario de Venta</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </aside>
+
+                <!-- Contenido Principal -->
+                <main class="flex-1 p-8 overflow-y-auto">
+                    <!-- Sección de la Lista de Ventas -->
+                    <div id="lista-ventas" class="content-section">
+                        <h2 class="text-3xl font-semibold mb-6 text-gray-900">Lista de Ventas</h2>
+                        <div class="bg-white rounded-xl shadow-lg p-6">
+                            <a href="#" onclick="showSection('form-venta')" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-4 inline-block">Agregar Venta</a>
+                            <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                                <thead class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                                    <tr>
+                                        <th class="py-3 px-6 text-left">ID</th>
+                                        <th class="py-3 px-6 text-left">Cliente</th>
+                                        <th class="py-3 px-6 text-left">Fecha</th>
+                                        <th class="py-3 px-6 text-left">Total</th>
+                                        <th class="py-3 px-6 text-center">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-gray-600 text-sm font-light">
+                                    <tr th:each="venta : ${ventas}" class="border-b border-gray-200 hover:bg-gray-100">
+                                        <td class="py-3 px-6 text-left" th:text="${venta.idVenta}">1</td>
+                                        <td class="py-3 px-6 text-left" th:text="${venta.cliente.nombre}">Juan Pérez</td>
+                                        <td class="py-3 px-6 text-left" th:text="${venta.fecha}">2025-08-27</td>
+                                        <td class="py-3 px-6 text-left" th:text="${venta.total}">$100.00</td>
+                                        <td class="py-3 px-6 text-center">
+                                            <a th:href="@{/ventas/editar/{id}(id=${venta.idVenta})}" class="text-indigo-600 hover:text-indigo-800 font-medium">Editar</a>
+                                            <span class="text-gray-400">|</span>
+                                            <a th:href="@{/ventas/eliminar/{id}(id=${venta.idVenta})}" class="text-red-600 hover:text-red-800 font-medium ml-2">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Sección del Formulario de Venta -->
+                    <div id="form-venta" class="content-section hidden">
+                        <h2 class="text-3xl font-semibold mb-6 text-gray-900">Crear/Editar Venta</h2>
+                        <div class="max-w-xl mx-auto bg-white rounded-xl shadow-lg p-6">
+                            <form th:action="@{/ventas/guardar}" th:object="${venta}" method="post">
+                                <input type="hidden" th:field="*{idVenta}" />
+                                <div class="mb-4">
+                                    <label for="cliente" class="block text-gray-700 text-sm font-bold mb-2">Cliente:</label>
+                                    <select id="cliente" th:field="*{cliente.idCliente}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                                        <option th:each="cliente : ${clientes}" th:value="${cliente.idCliente}" th:text="${cliente.nombre}"></option>
+                                    </select>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="fecha" class="block text-gray-700 text-sm font-bold mb-2">Fecha:</label>
+                                    <input type="date" id="fecha" th:field="*{fecha}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
+                                </div>
+                                <div class="mb-4">
+                                    <label for="total" class="block text-gray-700 text-sm font-bold mb-2">Total:</label>
+                                    <input type="number" id="total" th:field="*{total}" step="0.01" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Guardar</button>
+                                    <a href="#" onclick="showSection('lista-ventas')" class="inline-block align-baseline font-bold text-sm text-indigo-600 hover:text-indigo-800">Cancelar</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <script>
+                function showSection(sectionId) {
+                    document.querySelectorAll('.content-section').forEach(section => {
+                        section.classList.add('hidden');
+                    });
+                    document.getElementById(sectionId).classList.remove('hidden');
+                    document.querySelectorAll('a').forEach(link => {
+                        link.classList.remove('active-link');
+                    });
+                    document.getElementById('link-' + sectionId.split('-')[0]).classList.add('active-link');
+                }
+                document.getElementById('link-lista').addEventListener('click', () => showSection('lista-ventas'));
+                document.getElementById('link-form').addEventListener('click', () => showSection('form-venta'));
+            </script>
+        </div>
+    </body>
+</html>

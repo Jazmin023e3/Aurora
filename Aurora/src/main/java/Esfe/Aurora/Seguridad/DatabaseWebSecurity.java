@@ -16,11 +16,13 @@ public class DatabaseWebSecurity {
     @Bean
     public UserDetailsManager customUser(DataSource dataSource) {
         JdbcUserDetailsManager users = new JdbcUserDetailsManager(dataSource);
-        users.setUsersByUsernameQuery("SELECT login, clave,status as enabled FROM usuario WHERE login = ?");
-        users.setAuthoritiesByUsernameQuery("SELECT u.login, r.nombre as authority FROM usuario_rol ur " +
-                "INNER JOIN usuario u ON u.id = ur.usuario_id " +
-                "INNER JOIN rol r ON r.id = ur.rol_id " +
-                "WHERE u.login = ?");
+        users.setUsersByUsernameQuery("SELECT login, clave, status as enabled FROM usuario WHERE login = ?");
+        users.setAuthoritiesByUsernameQuery(
+            "SELECT u.login, r.nombre as authority FROM usuario_rol ur " +
+            "INNER JOIN usuario u ON u.id = ur.usuario_id " +
+            "INNER JOIN rol r ON r.id = ur.rol_id " +
+            "WHERE u.login = ?"
+        );
         return users;
     }
 
@@ -28,9 +30,13 @@ public class DatabaseWebSecurity {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/assets/**", "/css/**", "/js/**", "/images/**", "/fonts/**", "/error/**", "/", "/privacy/**", "/terms/**", "/login").permitAll()
-                .requestMatchers("/grupos/**", "/usuarios/**", "/docentes/**", "/asignaciones/**").hasAuthority("admin")
-                .requestMatchers("/anillos/**", "/clientes/**", "/ventas/**", "/detalles/**").authenticated()
+                .requestMatchers(
+                    "/assets/**", "/css/**", "/js/**", "/images/**", "/fonts/**",
+                    "/error/**", "/", "/privacy/**", "/terms/**", "/login"
+                ).permitAll()
+                .requestMatchers(
+                    "/anillos/**", "/clientes/**", "/ventas/**", "/detalles/**"
+                ).authenticated()
                 .requestMatchers("/alumnos/**").hasAnyAuthority("admin", "docente")
                 .anyRequest().authenticated()
             );
@@ -47,6 +53,5 @@ public class DatabaseWebSecurity {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
 }
-
+}    

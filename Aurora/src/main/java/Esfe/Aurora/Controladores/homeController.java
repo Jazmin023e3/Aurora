@@ -13,7 +13,7 @@ public class homeController {
 
     @RequestMapping
     public String index() {
-        return "Home/Index";
+        return "Home/index";
     }
 
     @Override

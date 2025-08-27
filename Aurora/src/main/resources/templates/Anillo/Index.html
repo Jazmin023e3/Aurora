@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/_mainLayout}">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+      layout:decorate="~{Layouts/_mainLayout}">
 <head>
-    <title layout:fragment="title">Listado de Anillos</title>
+   <title layout:fragment="title">Aurora</title>
+<div layout:fragment="content"></div>
 </head>
 <body>
 <section layout:fragment="content">
-    
+
     <!-- Mensajes de confirmación -->
     <div th:if="${msg != null }">
         <script>
