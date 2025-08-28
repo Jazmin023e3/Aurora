@@ -25,29 +25,53 @@ public class Anillo {
     private Integer stock;
 
     
-    public Anillo() {
-    }
-
-    
-    public Anillo(String nombre, String material, String piedra, String talla, BigDecimal peso, BigDecimal precio, Integer stock) {
-        this.nombre = nombre;
-        this.material = material;
-        this.piedra = piedra;
-        this.talla = talla;
-        this.peso = peso;
-        this.precio = precio;
-        this.stock = stock;
-    }
-
-  
     public Integer getIdAnillo() {
         return idAnillo;
     }
- 
     public void setIdAnillo(Integer idAnillo) {
         this.idAnillo = idAnillo;
     }
-
+    public String getNombre() {
+        return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    public String getMaterial() {
+        return material;
+    }
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+    public String getPiedra() {
+        return piedra;
+    }
+    public void setPiedra(String piedra) {
+        this.piedra = piedra;
+    }
+    public String getTalla() {
+        return talla;
+    }
+    public void setTalla(String talla) {
+        this.talla = talla;
+    }
+    public BigDecimal getPeso() {
+        return peso;
+    }
+    public void setPeso(BigDecimal peso) {
+        this.peso = peso;
+    }
+    public BigDecimal getPrecio() {
+        return precio;
+    }
+    public void setPrecio(BigDecimal precio) {
+        this.precio = precio;
+    }
+    public Integer getStock() {
+        return stock;
+    }
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
     
 }
-
